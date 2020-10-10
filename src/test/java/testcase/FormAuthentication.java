@@ -8,28 +8,27 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
+import pages.FormAuthenticationPage;
+
+import static support.Browsers.close;
+import static support.Browsers.openBrowser;
 
 public class FormAuthentication {
-    private static WebDriver driver;
-    public static WebDriverWait waiter;
 
     @BeforeMethod
     public static void setUp() {
-        driver = new ChromeDriver();
-        driver.get("https://the-internet.herokuapp.com/login");
+        openBrowser();
     }
 
     @Test
     public static void tc_01() {
-        driver.findElement(By.id("username")).sendKeys("tomsmith");
-        driver.findElement(By.id("password")).sendKeys("SuperSecretPassword!");
-        driver.findElement(By.xpath("//button[@type='submit']")).click();
+        FormAuthenticationPage formPage = new FormAuthenticationPage();
+        formPage.open();
+        formPage.fillForm("tomsmith", "SuperSecretPassword!");
     }
 
     @AfterMethod
     public void tearDown() {
-        if (driver != null) {
-            driver.quit();
-        }
+        close();
     }
 }
