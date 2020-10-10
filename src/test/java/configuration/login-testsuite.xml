@@ -1,0 +1,7 @@
+<suite name = "the internet heroku">
+    <test name ="Login Authentication">
+        <classes>
+            <class name="testcase.FormAuthentication" />
+        </classes>
+    </test>
+</suite>
